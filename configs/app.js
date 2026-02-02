@@ -6,6 +6,7 @@ import express from 'express';
 import cors from "cors"
 import morgan from "morgan";
 import { corsOptions } from "./cors-configuration.js";
+import { dbConnection } from './db.js';
 
 import fieldRoutes from '../src/fields/field.routes.js';
 
@@ -28,8 +29,10 @@ const initServer = async (app) => {
     const PORT = process.env.PORT || 3001;
 
     try {
+        dbConnection();
         middlewares(app);
         routes(app);
+
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en el puerto ${PORT}`);
             console.log(`Base URL: http://localhost:${PORT}${BASE_URL}`);
