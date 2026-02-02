@@ -20,18 +20,12 @@ const reservationSchema = new mongoose.Schema({
   startTime: {
     type: String,
     required: [true, "La hora de inicio es requerida"],
-    match: [
-      /^([01]\d|2[0-3]):([0-5]\d)$/,
-      "Formato de hora inválido (HH:mm)",
-    ],
+
   },
   endTime: {
     type: String,
     required: [true, "La hora de finalización es requerida"],
-    match: [
-      /^([01]\d|2[0-3]):([0-5]\d)$/,
-      "Formato de hora inválido (HH:mm)",
-    ],
+
   },
   totalPrice: {
     type: Number,

@@ -9,6 +9,8 @@ import { corsOptions } from "./cors-configuration.js";
 import { dbConnection } from './db.js';
 
 import fieldRoutes from '../src/fields/field.routes.js';
+import reservationRoutes from '../src/reservations/reservations.routes.js';
+
 
 const BASE_URL = `/kinalSportAdmin/v1`;
 
@@ -21,6 +23,8 @@ const middlewares = (app) => {
 
 const routes = (app) => {
     app.use(`${BASE_URL}/fields`, fieldRoutes);
+    app.use(`${BASE_URL}/reservations`, reservationRoutes);
+
 }
 
 //Función para iniciar el servidor
