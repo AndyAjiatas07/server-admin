@@ -12,17 +12,6 @@ const teamSchema = new mongoose.Schema({
       "El nombre del equipo no puede exceder 100 caracteres",
     ],
   },
-  captain: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "El capitán del equipo es requerido"],
-  },
-  members: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  ],
   sportType: {
     type: String,
     required: [true, "El tipo de deporte es requerido"],

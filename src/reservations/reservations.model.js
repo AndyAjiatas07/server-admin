@@ -3,11 +3,6 @@
 import mongoose from "mongoose";
 
 const reservationSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "El usuario es requerido"],
-  },
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Field",
@@ -20,12 +15,10 @@ const reservationSchema = new mongoose.Schema({
   startTime: {
     type: String,
     required: [true, "La hora de inicio es requerida"],
-
   },
   endTime: {
     type: String,
     required: [true, "La hora de finalización es requerida"],
-
   },
   totalPrice: {
     type: Number,

@@ -15,7 +15,6 @@ export const getReservations = async (req, res) => {
     }
 
     const reservations = await Reservation.find(filter)
-      .populate('user', 'name email')
       .populate('field', 'fieldName pricePerHour')
       .limit(limit * 1)
       .skip((page - 1) * limit)
@@ -51,7 +50,6 @@ export const getReservationById = async (req, res) => {
     const { id } = req.params;
 
     const reservation = await Reservation.findById(id)
-      .populate('user', 'name email')
       .populate('field', 'fieldName pricePerHour');
 
     if (!reservation) {

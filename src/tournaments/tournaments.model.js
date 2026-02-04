@@ -26,9 +26,13 @@ const tournamentSchema = new mongoose.Schema({
     required: [true, "La cancha es requerida"],
   },
   organizer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
     required: [true, "El organizador es requerido"],
+    trim: true,
+    maxLength: [
+      120,
+      "El nombre del torneo no puede exceder 120 caracteres",
+    ],
   },
   teams: [
     {

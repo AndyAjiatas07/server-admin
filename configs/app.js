@@ -7,24 +7,34 @@ import cors from "cors"
 import morgan from "morgan";
 import { corsOptions } from "./cors-configuration.js";
 import { dbConnection } from './db.js';
+import helmet from 'helmet';
 
 import fieldRoutes from '../src/fields/field.routes.js';
 import reservationRoutes from '../src/reservations/reservations.routes.js';
+import teamRoutes from '../src/teams/teams.routes.js';
+import tournamentsRoutes from '../src/tournaments/tournaments.routes.js';
+import { helmetConfiguration } from './helmet-configuration.js';
+import { requestLimit } from '../middlewares/request-limit.js';
+import { errorHandler } from '../middlewares/handle-errors.js';
 
 
 const BASE_URL = `/kinalSportAdmin/v1`;
 
 const middlewares = (app) => {
+    app.use(helmet(helmetConfiguration));
+    app.use(cors(corsOptions));
     app.use(express.urlencoded({ extended: false, limit: `10mb` }))
     app.use(express.json({ limit: '10mb' }));
     app.use(cors(corsOptions));
+    app.use(requestLimit);
     app.use(morgan('dev'));
 }
 
 const routes = (app) => {
     app.use(`${BASE_URL}/fields`, fieldRoutes);
     app.use(`${BASE_URL}/reservations`, reservationRoutes);
-
+    app.use(`${BASE_URL}/teams`, teamRoutes);
+    app.use(`${BASE_URL}/tournaments`, tournamentsRoutes);
 }
 
 //Función para iniciar el servidor
@@ -36,7 +46,7 @@ const initServer = async (app) => {
         dbConnection();
         middlewares(app);
         routes(app);
-
+        app.use(errorHandler);
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en el puerto ${PORT}`);
             console.log(`Base URL: http://localhost:${PORT}${BASE_URL}`);
