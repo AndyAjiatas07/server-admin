@@ -23,4 +23,3 @@ export const helmetConfiguration = {
     crossOriginResourcePolicy: { policy: 'cross-origin' },
     crossOriginEmbedderPolicy: false,
 };
- 

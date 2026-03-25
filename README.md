@@ -269,4 +269,3 @@ Andy Ariel Ajiatas Xiquin
 2021496
 
 Proyecto académico desarrollado para prácticas de backend con Node.js y MongoDB.
-
